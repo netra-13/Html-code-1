@@ -1,215 +1,288 @@
-</head>
+
+<head>
 <meta charset="UTF-8">
-<title>Quiz App</title>
+<title>Quiz Portal</title>
 
 <style>
 body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: linear-gradient(135deg, mediumaquamarine, lightsteelblue);
     margin: 0;
-    padding: 20px;
+    font-family: Arial;
+    background: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644') no-repeat center center/cover;
+    background-size: cover;
 }
 
-.quiz-container {
-    max-width: 750px;
-    margin: auto;
+/* light overlay */
+body::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
     background: white;
-    padding: 25px 35px;
+    opacity: 0.6;
+    z-index: -1;
+}
+
+.container {
+    background: white;
+    width: 85%;
+    margin: 30px auto;
+    padding: 20px;
     border-radius: 15px;
-    box-shadow: 0 8px 25px lightgray;
-}
-
-h2 {
+    box-shadow: 0 5px 15px gray;
     text-align: center;
-    color: dimgray;
 }
 
-.question {
-    margin-bottom: 20px;
-    padding: 12px;
-    background: ghostwhite;
-    border-left: 5px solid slateblue;
-    border-radius: 8px;
-    font-weight: bold;
+h1, h2 {
+    color: darkslateblue;
 }
 
-.answers input {
-    margin-right: 8px;
-}
-
-.btn {
+/* portal buttons */
+a.button {
     display: inline-block;
-    margin-top: 20px;
     padding: 12px 18px;
-    background: linear-gradient(135deg, hotpink, lightcoral);
-    color: white;
-    border-radius: 25px;
-    cursor: pointer;
+    margin: 10px;
+    background: lightpink;
+    color: black;
+    text-decoration: none;
+    border-radius: 10px;
     font-weight: bold;
-    text-align: center;
 }
 
-.btn:hover {
-    background: linear-gradient(135deg, crimson, salmon);
+a.button:hover {
+    background: plum;
 }
 
+/* pages */
+.page {
+    display: none;
+}
+
+.page:target {
+    display: block;
+}
+
+/* show home by default */
+#home {
+    display: block;
+}
+
+/* question box */
+.question {
+    text-align: left;
+    background: lavenderblush;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* options */
+.option {
+    display: block;
+    margin: 4px 0;
+    padding: 5px;
+    background: lightblue;
+    border-radius: 6px;
+}
+
+/* answer button */
+details {
+    margin-top: 8px;
+    background: #f5f5f5;
+    padding: 5px;
+    border-radius: 8px;
+    text-align: left;
+}
 </style>
-
-<script>
-function checkAnswers() {
-
-    const correctAnswers = {
-        q1: "Delhi",
-        q2: "Mars",
-        q3: "William Shakespeare",
-        q4: "12",
-        q5: "Carbon Dioxide",
-        q6: "Pacific",
-        q7: "Cheetah",
-        q8: "Hyper Text Markup Language",
-        q9: "Italy",
-        q10: "Blue Whale"
-    };
-
-    let score = 0;
-    let total = 10;
-
-    for (let q in correctAnswers) {
-
-        let selected = document.querySelector(`input[name="${q}"]:checked`);
-        let options = document.getElementsByName(q);
-
-        // reset colors
-        options.forEach(opt => {
-            opt.parentElement.style.color = "black";
-        });
-
-        // mark correct answers
-        options.forEach(opt => {
-            if (opt.value === correctAnswers[q]) {
-                opt.parentElement.style.color = "green";
-            }
-        });
-
-        // check user answer
-        if (selected && selected.value === correctAnswers[q]) {
-            score++;
-            selected.parentElement.style.color = "green";
-        } else if (selected) {
-            selected.parentElement.style.color = "red";
-        }
-    }
-
-    document.getElementById("scoreText").innerHTML =
-        "Your Score: " + score + " / " + total;
-}
-</script>
-
 </head>
 
 <body>
 
-<div class="quiz-container">
-<h2>General Knowledge Quiz</h2>
+<!-- HOME -->
+<div class="container page" id="home">
+    <h1>🎯 Quiz Portal</h1>
+    <p>Tap to Open Quiz</p>
 
-<div class="question">
-1. What is the capital of India?
-<div class="answers">
-<input type="radio" name="q1" value="Mumbai"> Mumbai<br>
-<input type="radio" name="q1" value="Delhi"> Delhi<br>
-<input type="radio" name="q1" value="Kolkata"> Kolkata<br>
-</div>
+    <a class="button" href="#general">General Quiz</a>
+    <a class="button" href="#science">Science Quiz</a>
+    <a class="button" href="#math">Math Quiz</a>
 </div>
 
-<div class="question">
-2. Which planet is known as Red Planet?
-<div class="answers">
-<input type="radio" name="q2" value="Earth"> Earth<br>
-<input type="radio" name="q2" value="Mars"> Mars<br>
-<input type="radio" name="q2" value="Venus"> Venus<br>
-</div>
-</div>
+<!-- ================= GENERAL ================= -->
+<div class="container page" id="general">
+<h2>General Quiz</h2>
 
 <div class="question">
-3. Who wrote Hamlet?
-<div class="answers">
-<input type="radio" name="q3" value="Charles Dickens"> Charles Dickens<br>
-<input type="radio" name="q3" value="William Shakespeare"> William Shakespeare<br>
-<input type="radio" name="q3" value="Tolstoy"> Tolstoy<br>
-</div>
+1. Capital of India?<br>
+<div class="option">Mumbai</div>
+<div class="option">Delhi</div>
+<div class="option">Chennai</div>
+<div class="option">Kolkata</div>
+
+<details>
+<summary>Show Answer</summary>
+Delhi
+</details>
 </div>
 
 <div class="question">
-4. What is 5 + 7?
-<div class="answers">
-<input type="radio" name="q4" value="10"> 10<br>
-<input type="radio" name="q4" value="12"> 12<br>
-<input type="radio" name="q4" value="14"> 14<br>
-</div>
+2. Largest ocean?<br>
+<div class="option">Atlantic</div>
+<div class="option">Pacific</div>
+<div class="option">Indian</div>
+<div class="option">Arctic</div>
+
+<details><summary>Show Answer</summary>Pacific</details>
 </div>
 
 <div class="question">
-5. Which gas do plants absorb?
-<div class="answers">
-<input type="radio" name="q5" value="Oxygen"> Oxygen<br>
-<input type="radio" name="q5" value="Carbon Dioxide"> Carbon Dioxide<br>
-<input type="radio" name="q5" value="Nitrogen"> Nitrogen<br>
-</div>
+3. National animal?<br>
+<div class="option">Tiger</div>
+<div class="option">Lion</div>
+<div class="option">Elephant</div>
+<div class="option">Dog</div>
+
+<details><summary>Show Answer</summary>Tiger</details>
 </div>
 
 <div class="question">
-6. Largest ocean?
-<div class="answers">
-<input type="radio" name="q6" value="Atlantic"> Atlantic<br>
-<input type="radio" name="q6" value="Indian"> Indian<br>
-<input type="radio" name="q6" value="Pacific"> Pacific<br>
-</div>
+4. Currency of USA?<br>
+<div class="option">Dollar</div>
+<div class="option">Euro</div>
+<div class="option">Rupee</div>
+<div class="option">Yen</div>
+
+<details><summary>Show Answer</summary>Dollar</details>
 </div>
 
 <div class="question">
-7. Fastest animal?
-<div class="answers">
-<input type="radio" name="q7" value="Cheetah"> Cheetah<br>
-<input type="radio" name="q7" value="Lion"> Lion<br>
-<input type="radio" name="q7" value="Tiger"> Tiger<br>
+5. Sun rises in?<br>
+<div class="option">East</div>
+<div class="option">West</div>
+<div class="option">North</div>
+<div class="option">South</div>
+
+<details><summary>Show Answer</summary>East</details>
 </div>
+
+<br>
+<a class="button" href="#home">⬅ Back</a>
+</div>
+
+<!-- ================= SCIENCE ================= -->
+<div class="container page" id="science">
+<h2>Science Quiz</h2>
+
+<div class="question">
+1. H2O is?<br>
+<div class="option">Water</div>
+<div class="option">Oxygen</div>
+<div class="option">Hydrogen</div>
+<div class="option">Helium</div>
+
+<details><summary>Show Answer</summary>Water</details>
 </div>
 
 <div class="question">
-8. HTML stands for?
-<div class="answers">
-<input type="radio" name="q8" value="Hyper Text Markup Language"> Hyper Text Markup Language<br>
-<input type="radio" name="q8" value="High Text Machine Language"> High Text Machine Language<br>
-<input type="radio" name="q8" value="Hyper Tool Multi Language"> Hyper Tool Multi Language<br>
-</div>
+2. Sun is?<br>
+<div class="option">Star</div>
+<div class="option">Planet</div>
+<div class="option">Moon</div>
+<div class="option">Comet</div>
+
+<details><summary>Show Answer</summary>Star</details>
 </div>
 
 <div class="question">
-9. Pizza country?
-<div class="answers">
-<input type="radio" name="q9" value="France"> France<br>
-<input type="radio" name="q9" value="Italy"> Italy<br>
-<input type="radio" name="q9" value="USA"> USA<br>
-</div>
+3. Gas for breathing?<br>
+<div class="option">Oxygen</div>
+<div class="option">CO2</div>
+<div class="option">Nitrogen</div>
+<div class="option">Hydrogen</div>
+
+<details><summary>Show Answer</summary>Oxygen</details>
 </div>
 
 <div class="question">
-10. Largest mammal?
-<div class="answers">
-<input type="radio" name="q10" value="Elephant"> Elephant<br>
-<input type="radio" name="q10" value="Blue Whale"> Blue Whale<br>
-<input type="radio" name="q10" value="Giraffe"> Giraffe<br>
-</div>
+4. Earth is?<br>
+<div class="option">Planet</div>
+<div class="option">Star</div>
+<div class="option">Galaxy</div>
+<div class="option">Comet</div>
+
+<details><summary>Show Answer</summary>Planet</details>
 </div>
 
-<div class="btn" onclick="checkAnswers()">Submit Quiz</div>
+<div class="question">
+5. Boiling point of water?<br>
+<div class="option">100°C</div>
+<div class="option">90°C</div>
+<div class="option">80°C</div>
+<div class="option">120°C</div>
 
-<h3 id="scoreText" style="margin-top:20px;"></h3>
-
+<details><summary>Show Answer</summary>100°C</details>
 </div>
-<div style="marg
-</body>
-</html>
+
+<br>
+<a class="button" href="#home">⬅ Back</a>
+</div>
+
+<!-- ================= MATH ================= -->
+<div class="container page" id="math">
+<h2>Math Quiz</h2>
+
+<div class="question">
+1. 5 + 3?<br>
+<div class="option">6</div>
+<div class="option">7</div>
+<div class="option">8</div>
+<div class="option">9</div>
+
+<details><summary>Show Answer</summary>8</details>
+</div>
+
+<div class="question">
+2. 10 × 2?<br>
+<div class="option">10</div>
+<div class="option">20</div>
+<div class="option">30</div>
+<div class="option">40</div>
+
+<details><summary>Show Answer</summary>20</details>
+</div>
+
+<div class="question">
+3. 15 ÷ 3?<br>
+<div class="option">5</div>
+<div class="option">6</div>
+<div class="option">7</div>
+<div class="option">8</div>
+
+<details><summary>Show Answer</summary>5</details>
+</div>
+
+<div class="question">
+4. 4²?<br>
+<div class="option">8</div>
+<div class="option">12</div>
+<div class="option">16</div>
+<div class="option">20</div>
+
+<details><summary>Show Answer</summary>16</details>
+</div>
+
+<div class="question">
+5. 9 - 4?<br>
+<div class="option">3</div>
+<div class="option">4</div>
+<div class="option">5</div>
+<div class="option">6</div>
+
+<details><summary>Show Answer</summary>5</details>
+</div>
+
+<br>
+<a class="button" href="#home">⬅ Back</a>
+</div>
 
 </body>
 </html>
