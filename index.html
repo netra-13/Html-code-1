@@ -1,98 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
 <title>Quiz Portal</title>
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <style>
-body {
-    margin: 0;
-    font-family: Arial;
-    background: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644') no-repeat center center/cover;
-    background-size: cover;
+body{
+    margin:0;
+    font-family:Arial;
+    background:url('https://images.unsplash.com/photo-1523240795612-9a054b0db644') no-repeat center/cover;
 }
+body::before{
+    content:"";
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:white;
+    opacity:0.6;
+    z-index:-1;
+}
+.container{
+    background:white;
+    width:85%;
+    margin:30px auto;
+    padding:20px;
+    border-radius:15px;
+    text-align:center;
+}
+.page{display:none;}
+.page:target{display:block;}
+#home{display:block;}
 
-/* light overlay */
-body::before {
-    content: "";
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: white;
-    opacity: 0.6;
-    z-index: -1;
+.question{
+    text-align:left;
+    background:#fce4ec;
+    margin:10px 0;
+    padding:10px;
+    border-radius:10px;
 }
-
-.container {
-    background: white;
-    width: 85%;
-    margin: 30px auto;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px gray;
-    text-align: center;
+.option{
+    display:block;
+    margin:5px 0;
+    cursor:pointer;
 }
-
-h1, h2 {
-    color: darkslateblue;
-}
-
-/* portal buttons */
-a.button {
-    display: inline-block;
-    padding: 12px 18px;
-    margin: 10px;
-    background: lightpink;
-    color: black;
-    text-decoration: none;
-    border-radius: 10px;
-    font-weight: bold;
-}
-
-a.button:hover {
-    background: plum;
-}
-
-/* pages */
-.page {
-    display: none;
-}
-
-.page:target {
-    display: block;
-}
-
-/* show home by default */
-#home {
-    display: block;
-}
-
-/* question box */
-.question {
-    text-align: left;
-    background: lavenderblush;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 10px;
-}
-
-/* options */
-.option {
-    display: block;
-    margin: 4px 0;
-    padding: 5px;
-    background: lightblue;
-    border-radius: 6px;
-}
-
-/* answer button */
-details {
-    margin-top: 8px;
-    background: #f5f5f5;
-    padding: 5px;
-    border-radius: 8px;
-    text-align: left;
-}
+.active{border:2px solid black;}
+.timerBox{font-weight:bold;}
+.resultBox{font-weight:bold;}
 </style>
 </head>
 
@@ -100,190 +54,227 @@ details {
 
 <!-- HOME -->
 <div class="container page" id="home">
-    <h1>🎯 Quiz Portal</h1>
-    <p>Tap to Open Quiz</p>
+<h1>Quiz Portal</h1>
+<p>Select Quiz</p>
 
-    <a class="button" href="#general">General Quiz</a>
-    <a class="button" href="#science">Science Quiz</a>
-    <a class="button" href="#math">Math Quiz</a>
+<a class="btn btn-primary m-2" href="#general" onclick="startQuiz('general')">General</a>
+<a class="btn btn-success m-2" href="#science" onclick="startQuiz('science')">Science</a>
+<a class="btn btn-warning m-2" href="#math" onclick="startQuiz('math')">Math</a>
 </div>
 
-<!-- ================= GENERAL ================= -->
+<!-- GENERAL -->
 <div class="container page" id="general">
 <h2>General Quiz</h2>
 
 <div class="question">
-1. Capital of India?<br>
-<div class="option">Mumbai</div>
-<div class="option">Delhi</div>
-<div class="option">Chennai</div>
-<div class="option">Kolkata</div>
-
-<details>
-<summary>Show Answer</summary>
-Delhi
-</details>
+1. Capital of India?
+<div class="option btn btn-outline-primary">Mumbai</div>
+<div class="option btn btn-outline-primary">Delhi</div>
+<div class="option btn btn-outline-primary">Chennai</div>
+<div class="option btn btn-outline-primary">Kolkata</div>
 </div>
 
 <div class="question">
-2. Largest ocean?<br>
-<div class="option">Atlantic</div>
-<div class="option">Pacific</div>
-<div class="option">Indian</div>
-<div class="option">Arctic</div>
-
-<details><summary>Show Answer</summary>Pacific</details>
+2. Largest ocean?
+<div class="option btn btn-outline-primary">Atlantic</div>
+<div class="option btn btn-outline-primary">Pacific</div>
+<div class="option btn btn-outline-primary">Indian</div>
+<div class="option btn btn-outline-primary">Arctic</div>
 </div>
 
 <div class="question">
-3. National animal?<br>
-<div class="option">Tiger</div>
-<div class="option">Lion</div>
-<div class="option">Elephant</div>
-<div class="option">Dog</div>
-
-<details><summary>Show Answer</summary>Tiger</details>
+3. National animal?
+<div class="option btn btn-outline-primary">Tiger</div>
+<div class="option btn btn-outline-primary">Lion</div>
+<div class="option btn btn-outline-primary">Elephant</div>
+<div class="option btn btn-outline-primary">Dog</div>
 </div>
 
 <div class="question">
-4. Currency of USA?<br>
-<div class="option">Dollar</div>
-<div class="option">Euro</div>
-<div class="option">Rupee</div>
-<div class="option">Yen</div>
-
-<details><summary>Show Answer</summary>Dollar</details>
+4. Currency of USA?
+<div class="option btn btn-outline-primary">Dollar</div>
+<div class="option btn btn-outline-primary">Euro</div>
+<div class="option btn btn-outline-primary">Rupee</div>
+<div class="option btn btn-outline-primary">Yen</div>
 </div>
 
 <div class="question">
-5. Sun rises in?<br>
-<div class="option">East</div>
-<div class="option">West</div>
-<div class="option">North</div>
-<div class="option">South</div>
-
-<details><summary>Show Answer</summary>East</details>
+5. Sun rises in?
+<div class="option btn btn-outline-primary">East</div>
+<div class="option btn btn-outline-primary">West</div>
+<div class="option btn btn-outline-primary">North</div>
+<div class="option btn btn-outline-primary">South</div>
 </div>
 
-<br>
-<a class="button" href="#home">⬅ Back</a>
+<div class="timerBox"></div>
+<button class="btn btn-danger" onclick="submitQuiz()">Submit</button>
+<div class="resultBox"></div>
+
+<a href="#home">Back</a>
 </div>
 
-<!-- ================= SCIENCE ================= -->
+<!-- SCIENCE -->
 <div class="container page" id="science">
 <h2>Science Quiz</h2>
 
 <div class="question">
-1. H2O is?<br>
-<div class="option">Water</div>
-<div class="option">Oxygen</div>
-<div class="option">Hydrogen</div>
-<div class="option">Helium</div>
-
-<details><summary>Show Answer</summary>Water</details>
+1. H2O is?
+<div class="option btn btn-outline-success">Water</div>
+<div class="option btn btn-outline-success">Oxygen</div>
+<div class="option btn btn-outline-success">Hydrogen</div>
+<div class="option btn btn-outline-success">Helium</div>
 </div>
 
 <div class="question">
-2. Sun is?<br>
-<div class="option">Star</div>
-<div class="option">Planet</div>
-<div class="option">Moon</div>
-<div class="option">Comet</div>
-
-<details><summary>Show Answer</summary>Star</details>
+2. Sun is?
+<div class="option btn btn-outline-success">Star</div>
+<div class="option btn btn-outline-success">Planet</div>
+<div class="option btn btn-outline-success">Moon</div>
+<div class="option btn btn-outline-success">Comet</div>
 </div>
 
 <div class="question">
-3. Gas for breathing?<br>
-<div class="option">Oxygen</div>
-<div class="option">CO2</div>
-<div class="option">Nitrogen</div>
-<div class="option">Hydrogen</div>
-
-<details><summary>Show Answer</summary>Oxygen</details>
+3. Gas for breathing?
+<div class="option btn btn-outline-success">Oxygen</div>
+<div class="option btn btn-outline-success">CO2</div>
+<div class="option btn btn-outline-success">Nitrogen</div>
+<div class="option btn btn-outline-success">Hydrogen</div>
 </div>
 
 <div class="question">
-4. Earth is?<br>
-<div class="option">Planet</div>
-<div class="option">Star</div>
-<div class="option">Galaxy</div>
-<div class="option">Comet</div>
-
-<details><summary>Show Answer</summary>Planet</details>
+4. Earth is?
+<div class="option btn btn-outline-success">Planet</div>
+<div class="option btn btn-outline-success">Star</div>
+<div class="option btn btn-outline-success">Galaxy</div>
+<div class="option btn btn-outline-success">Comet</div>
 </div>
 
 <div class="question">
-5. Boiling point of water?<br>
-<div class="option">100°C</div>
-<div class="option">90°C</div>
-<div class="option">80°C</div>
-<div class="option">120°C</div>
-
-<details><summary>Show Answer</summary>100°C</details>
+5. Boiling point?
+<div class="option btn btn-outline-success">100°C</div>
+<div class="option btn btn-outline-success">90°C</div>
+<div class="option btn btn-outline-success">80°C</div>
+<div class="option btn btn-outline-success">120°C</div>
 </div>
 
-<br>
-<a class="button" href="#home">⬅ Back</a>
+<div class="timerBox"></div>
+<button class="btn btn-danger" onclick="submitQuiz()">Submit</button>
+<div class="resultBox"></div>
+
+<a href="#home">Back</a>
 </div>
 
-<!-- ================= MATH ================= -->
+<!-- MATH -->
 <div class="container page" id="math">
 <h2>Math Quiz</h2>
 
 <div class="question">
-1. 5 + 3?<br>
-<div class="option">6</div>
-<div class="option">7</div>
-<div class="option">8</div>
-<div class="option">9</div>
-
-<details><summary>Show Answer</summary>8</details>
+1. 5 + 3?
+<div class="option btn btn-outline-warning">6</div>
+<div class="option btn btn-outline-warning">7</div>
+<div class="option btn btn-outline-warning">8</div>
+<div class="option btn btn-outline-warning">9</div>
 </div>
 
 <div class="question">
-2. 10 × 2?<br>
-<div class="option">10</div>
-<div class="option">20</div>
-<div class="option">30</div>
-<div class="option">40</div>
-
-<details><summary>Show Answer</summary>20</details>
+2. 10 × 2?
+<div class="option btn btn-outline-warning">10</div>
+<div class="option btn btn-outline-warning">20</div>
+<div class="option btn btn-outline-warning">30</div>
+<div class="option btn btn-outline-warning">40</div>
 </div>
 
 <div class="question">
-3. 15 ÷ 3?<br>
-<div class="option">5</div>
-<div class="option">6</div>
-<div class="option">7</div>
-<div class="option">8</div>
-
-<details><summary>Show Answer</summary>5</details>
+3. 15 ÷ 3?
+<div class="option btn btn-outline-warning">5</div>
+<div class="option btn btn-outline-warning">6</div>
+<div class="option btn btn-outline-warning">7</div>
+<div class="option btn btn-outline-warning">8</div>
 </div>
 
 <div class="question">
-4. 4²?<br>
-<div class="option">8</div>
-<div class="option">12</div>
-<div class="option">16</div>
-<div class="option">20</div>
-
-<details><summary>Show Answer</summary>16</details>
+4. 4²?
+<div class="option btn btn-outline-warning">8</div>
+<div class="option btn btn-outline-warning">12</div>
+<div class="option btn btn-outline-warning">16</div>
+<div class="option btn btn-outline-warning">20</div>
 </div>
 
 <div class="question">
-5. 9 - 4?<br>
-<div class="option">3</div>
-<div class="option">4</div>
-<div class="option">5</div>
-<div class="option">6</div>
-
-<details><summary>Show Answer</summary>5</details>
+5. 9 - 4?
+<div class="option btn btn-outline-warning">3</div>
+<div class="option btn btn-outline-warning">4</div>
+<div class="option btn btn-outline-warning">5</div>
+<div class="option btn btn-outline-warning">6</div>
 </div>
 
-<br>
-<a class="button" href="#home">⬅ Back</a>
+<div class="timerBox"></div>
+<button class="btn btn-danger" onclick="submitQuiz()">Submit</button>
+<div class="resultBox"></div>
+
+<a href="#home">Back</a>
 </div>
+
+<script>
+let currentQuiz="";
+let time=60;
+let timer;
+
+// answers
+let answers={
+general:["Delhi","Pacific","Tiger","Dollar","East"],
+science:["Water","Star","Oxygen","Planet","100°C"],
+math:["8","20","5","16","5"]
+};
+
+// start quiz
+function startQuiz(id){
+    currentQuiz=id;
+    time=60;
+    showTime();
+
+    clearInterval(timer);
+    timer=setInterval(function(){
+        time--;
+        showTime();
+        if(time==0) submitQuiz();
+    },1000);
+}
+
+// show time
+function showTime(){
+    document.querySelector("#"+currentQuiz+" .timerBox").innerText="Time: "+time;
+}
+
+// select option
+document.querySelectorAll(".option").forEach(function(btn){
+    btn.onclick=function(){
+        let all=this.parentElement.querySelectorAll(".option");
+        all.forEach(function(o){ o.classList.remove("active"); });
+        this.classList.add("active");
+    };
+});
+
+// submit
+function submitQuiz(){
+    clearInterval(timer);
+
+    let questions=document.querySelectorAll("#"+currentQuiz+" .question");
+    let score=0;
+
+    questions.forEach(function(q,i){
+        let selected=q.querySelector(".active");
+        let correct=answers[currentQuiz][i];
+
+        if(selected && selected.innerText==correct){
+            score++;
+        }
+    });
+
+    document.querySelector("#"+currentQuiz+" .resultBox").innerText=
+        "Score: "+score+" / "+questions.length;
+}
+</script>
 
 </body>
 </html>
